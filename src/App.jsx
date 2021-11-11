@@ -14,7 +14,7 @@ import { Menu, Layout } from "antd";
 import "antd/dist/antd.css";
 import Blockie from "components/Blockie";
 import NativeBalance from "components/NativeBalance";
-import ChkPrice from "components/ChkPrice";
+import {ChkPrice} from "components/ChkPrice";
 
 import "./style.css";
 const { Header } = Layout;
