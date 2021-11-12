@@ -6,7 +6,6 @@
 
 💿 Install all dependencies:
 ```sh
-cd ethereum-boilerplate
 yarn install 
 ```
 ✏ Provide your appId and serverUrl from [Moralis](https://moralis.io/) ([How to start Moralis Server](https://docs.moralis.io/moralis-server/getting-started/create-a-moralis-server)) to `<MoralisProvider>` in `src/index.js`:
