@@ -6,14 +6,14 @@ import closeIcon from '../assets/icons/close.png';
 import ToggleButton from "./ToogleButton/ToggleButton";
 
 const HeaderContainer = styled.div`
-background-color: black;
+background-color: white;
 width: 80%;
 border-radius:5px;
 padding:10px 20px 10px 20px;
 `;
 
 const HeaderText = styled.h1`
-color: white;
+color: black;
 `;
 
 const CloseIcon = styled.img`
@@ -40,26 +40,37 @@ padding: 5px 5px 5px 10px;
 
 const SymbolText = styled.div`
 font-size: 12px;
-color: white;
+color: black;
+font-weight: 700;
 `;
 
 const SymbolInput = styled.input`
 width: 40%;
-border-bottom-right-radius: 5px;
-border-top-right-radius: 5px;
-background-color: #363434;
-color: white;
-padding: 2px;
-border-color: 6e6a6a;
+border-bottom-right-radius: 8px;
+border-top-right-radius: 8px;
+background-color: aliceblue;
+font-size: 14px;
+color: #041836;
+font-weight: 700;
+padding: 2px 0px 2px 5px;
+border-color: aliceblue;
+border-top:aliceblue;
+border-left-color: lightgrey;
+height: 45px;
 `;
 
 const SymbolInputLeft = styled.div`
+display: flex;
+background-color: aliceblue;
 font-size: 12px;
-color: white;
-padding: 5px;
-border-bottom-left-radius: 5px;
-border-top-left-radius: 5px;
-background-color: #6e6a6a;
+color: #041836;
+font-weight: 700;
+border-bottom-left-radius: 8px;
+border-top-left-radius: 8px;
+align-items: center;
+padding: 0 10px;
+border: none;
+height: 45px;
 `;
 
 const SymbolContainer = styled.div`
@@ -69,35 +80,46 @@ align-items: center;
 `;
 
 const NameInput = styled.input`
-background-color: #363434;
-color: white;
-border-radius: 5px;
-padding: 2px 2px 2px 10px;
+background-color: aliceblue;
+font-size: 12px;
+color: #041836;
+font-weight: 700;
+border-radius: 8px;
+align-items: center;
+padding: 0 10px;
 width: 100%;
+border: none;
+height: 45px;
 `;
 
 const TextAreaDiv = styled.textarea`
 width:100%;
-border-radius: 5px;
-background-color: #363434;
-color: white;
+border-radius: 8px;
+background-color: aliceblue;
+font-size: 12px;
+color: #041836;
+font-weight: 700;
 padding: 10px 0px 0px 10px;
+border: none;
 `;
 
 const Dropdown = styled.select`
-background-color: #363434;
+background-color: aliceblue;
 font-size: 12px;
-color: white;
+color: #041836;
+font-weight: 700;
 width: 50%;
-padding:5px;
-border-radius: 5px;
-border-color: black;
+height: 45px;
+padding:0px 10px 0px 10px;
+border-radius: 8px;
+border-color: white;
 margin-right: 20px;
 `;
 
 const VisibleText = styled.div`
 font-size: 12px;
-color: white;
+color: #041836;
+font-weight: 700;
 margin-right: 10px;
 margin-left: 10px;
 `;
@@ -111,15 +133,16 @@ align-items: center;
 
 const AllocationText = styled.div`
 font-size: 12px;
-color: white;
+color: #041836;
+font-weight: 700;
 margin-top: 10px;
 `;
 
 const AllocationContainerLeft = styled.div`
 margin-top: 5px;
-background-color: #363434;
+background-color: aliceblue;
 padding: 5px 15px 5px 5px;
-border-radius: 5px;
+border-radius: 8px;
 width: 90%;
 margin-right: 20px;
 `;
@@ -127,13 +150,13 @@ margin-right: 20px;
 const AllocationContainerRight = styled.div`
 margin-top: 5px;
 padding: 15px;
-background-color: #363434;
-border-radius: 5px;
+background-color: aliceblue;
+border-radius: 8px;
 `;
 
 const BottomLable = styled.div`
-background-color: #363434;
-border-radius: 5px;
+background-color: aliceblue;
+border-radius: 8px;
 padding: 15px 15px 15px 5px;
 display: flex;
 justify-content: space-between;
@@ -149,18 +172,23 @@ margin-top: 10px;
 `;
 
 const SearchInput = styled.input`
-background-color: #363434;
-border-radius: 5px;
-padding: 5px;
-padding-left: 10px;
+background-color: aliceblue;
+border-radius: 8px;
 width: 100%;
+border: none;
+padding: 0 10px;
+height: 45px;
+align-items: center;
+font-size: 14px;
+color: #041836;
+font-weight: 700;
 `;
 
 const RightCardContainer = styled.div`
-margin-top: 5px;
-background-color: #363434;
+margin-top: 8px;
+background-color: aliceblue;
 padding: 5px 15px 5px 5px;
-border-radius: 5px;
+border-radius: 8px;
 width: 100%;
 display: flex;
 flex-direction: row;
@@ -182,18 +210,22 @@ const ButtonDiv = styled.button`
   background-color: #343636;
   color: white;
   font-size: 15px;
+  font-weight: 700;
   padding: 5px 30px;
-  border-radius: 5px;
+  border-radius: 8px;
   margin: 10px 0px 0px 0px;
   cursor: pointer;
+  border: none;
 `;
 
 const ButtonDivRight = styled.button`
-  background-color: darkgreen;
+  background-color: #21bf96;
   color: white;
   font-size: 15px;
+  font-weight: 700;
   padding: 5px 30px;
-  border-radius: 5px;
+  border-radius: 8px;
+  border: none;
   margin: 10px 0px 0px 10px;
   cursor: pointer;
 `;
@@ -272,14 +304,14 @@ const handleChangeTextarea = (e) => {
       <MainContainer>
       <InnerLeftContainer>
         <div style={{flexDirection:"row", display:"flex"}}>
-          <div style={{width:"25%"}}>
+          <div style={{width:"25%", marginRight:"24px"}}>
             <SymbolText>{"Symbol"}</SymbolText>
             <SymbolContainer>
               <SymbolInputLeft>{"XTF2XXX"}</SymbolInputLeft>           
               <SymbolInput type="text" value={symbole.value} onChange={(e)=>handleChangeSymbol(e)} />
             </SymbolContainer>
           </div>
-          <div style={{width:"80%"}}>
+          <div style={{width:"70%"}}>
             <SymbolText>{"Name"}</SymbolText>
             <NameInput type="text" value={name.value} onChange={(e)=>handleChangeName(e)} />
           </div>
@@ -310,21 +342,21 @@ const handleChangeTextarea = (e) => {
         <div style={{display:"flex", flexDirection:"row"}}>
           <AllocationContainerLeft>
             <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-              <div style={{color:"white", fontSize:"14px"}}>{'Band Protocol'}</div>
-              <div style={{color:"lightgreen", fontSize:"12px"}}>{'4.52%'}</div>
+              <div style={{color:"#041836", fontSize:"14px", fontWeight:700}}>{'Band Protocol'}</div>
+              <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'4.52%'}</div>
             </div>
             <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-              <div style={{color:"darkgray", fontSize:"12px"}}>{'BAND'}</div>
-              <div style={{color:"darkgray", fontSize:"12px"}}>{'$6.820'}</div>
+              <div style={{color:"darkgray", fontSize:"12px", fontWeight:700}}>{'BAND'}</div>
+              <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'$6.820'}</div>
             </div>
           </AllocationContainerLeft>
           <AllocationContainerRight>
-            <div style={{color:"white", fontSize:"14px"}}>{'30%'}</div>
+            <div style={{color:"#041836", fontSize:"14px", fontWeight:700}}>{'30%'}</div>
           </AllocationContainerRight>
         </div>
         <BottomLable>
-          <div style={{color:"darkgray", fontSize:"14px"}}>{'4 / 10 Tokens'}</div>
-          <div style={{color:"darkgray", fontSize:"14px"}}>{'100.00%'}</div>
+          <div style={{color:"#041836", fontSize:"14px", fontWeight:700}}>{'4 / 10 Tokens'}</div>
+          <div style={{color:"#041836", fontSize:"14px", fontWeight:700}}>{'100.00%'}</div>
         </BottomLable>
       </InnerLeftContainer>
       <Divider />
@@ -336,47 +368,47 @@ const handleChangeTextarea = (e) => {
         />
             <RightCardContainer>
               <div>
-                <div style={{color:"white", fontSize:"14px"}}>{'Chain Link'}</div>
-                <div style={{color:"darkgray", fontSize:"12px"}}>{'Link'}</div>                           
+                <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'Chain Link'}</div>
+                <div style={{color:"darkgray", fontSize:"12px", fontWeight:700}}>{'Link'}</div>                           
               </div>
-              <div style={{color:"white", fontSize:"14px"}}>{'0xb4f7...9521'}</div>
+              <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'0xb4f7...9521'}</div>
               <div>
-                <div style={{color:"lightgreen", fontSize:"12px"}}>{'0.06%'}</div>   
-                <div style={{color:"darkgray", fontSize:"12px"}}>{'$18.130'}</div>
+                <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'0.06%'}</div>   
+                <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'$18.130'}</div>
               </div>
             </RightCardContainer>
 {/* -------------------------------------------------------------------------------------------------   */}
             <RightCardContainer>
               <div>
-                <div style={{color:"white", fontSize:"14px"}}>{'Chain Link'}</div>
-                <div style={{color:"darkgray", fontSize:"12px"}}>{'Link'}</div>                           
+                <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'Chain Link'}</div>
+                <div style={{color:"darkgray", fontSize:"12px", fontWeight:700}}>{'Link'}</div>                           
               </div>
-              <div style={{color:"white", fontSize:"14px"}}>{'0xb4f7...9521'}</div>
+              <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'0xb4f7...9521'}</div>
               <div>
-                <div style={{color:"lightgreen", fontSize:"12px"}}>{'0.06%'}</div>   
-                <div style={{color:"darkgray", fontSize:"12px"}}>{'$18.130'}</div>
-              </div>
-            </RightCardContainer>
-            <RightCardContainer>
-              <div>
-                <div style={{color:"white", fontSize:"14px"}}>{'Chain Link'}</div>
-                <div style={{color:"darkgray", fontSize:"12px"}}>{'Link'}</div>                           
-              </div>
-              <div style={{color:"white", fontSize:"14px"}}>{'0xb4f7...9521'}</div>
-              <div>
-                <div style={{color:"lightgreen", fontSize:"12px"}}>{'0.06%'}</div>   
-                <div style={{color:"darkgray", fontSize:"12px"}}>{'$18.130'}</div>
+                <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'0.06%'}</div>   
+                <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'$18.130'}</div>
               </div>
             </RightCardContainer>
             <RightCardContainer>
               <div>
-                <div style={{color:"white", fontSize:"14px"}}>{'Chain Link'}</div>
-                <div style={{color:"darkgray", fontSize:"12px"}}>{'Link'}</div>                           
+                <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'Chain Link'}</div>
+                <div style={{color:"darkgray", fontSize:"12px", fontWeight:700}}>{'Link'}</div>                           
               </div>
-              <div style={{color:"white", fontSize:"14px"}}>{'0xb4f7...9521'}</div>
+              <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'0xb4f7...9521'}</div>
               <div>
-                <div style={{color:"lightgreen", fontSize:"12px"}}>{'0.06%'}</div>   
-                <div style={{color:"darkgray", fontSize:"12px"}}>{'$18.130'}</div>
+                <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'0.06%'}</div>   
+                <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'$18.130'}</div>
+              </div>
+            </RightCardContainer>
+            <RightCardContainer>
+              <div>
+                <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'Chain Link'}</div>
+                <div style={{color:"darkgray", fontSize:"12px", fontWeight:700}}>{'Link'}</div>                           
+              </div>
+              <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'0xb4f7...9521'}</div>
+              <div>
+                <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'0.06%'}</div>   
+                <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'$18.130'}</div>
               </div>
             </RightCardContainer>
   {/* ----------------------------------------------------------------------------------------------- */}
