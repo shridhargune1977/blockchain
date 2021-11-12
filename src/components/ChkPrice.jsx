@@ -411,7 +411,7 @@ const handleChangeTextarea = (e) => {
                 <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'$18.130'}</div>
               </div>
             </RightCardContainer>
-  {/* ----------------------------------------------------------------------------------------------- */}
+  {/* ------------------------------------------------------------------------------------------------ */}
       </InnerRightContainer>
       </MainContainer>
       <BottomDivider />
