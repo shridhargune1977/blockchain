@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { useMoralis } from "react-moralis";
-import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+  Redirect,
+} from "react-router-dom";
 import Account from "components/Account";
 import Chains from "components/Chains";
 import TokenPrice from "components/TokenPrice";
@@ -10,12 +16,13 @@ import ERC20Transfers from "components/ERC20Transfers";
 import InchDex from "components/InchDex";
 import NFTBalance from "components/NFTBalance";
 import Wallet from "components/Wallet";
+import Home from "components/Home";
 import { Menu, Layout } from "antd";
 import "antd/dist/antd.css";
 import Blockie from "components/Blockie";
 import NativeBalance from "components/NativeBalance";
-import {ChkPrice} from "components/ChkPrice";
-import logoIcon from 'assets/icons/logo.png';
+import { ChkPrice } from "components/ChkPrice";
+import logoIcon from "assets/icons/logo.png";
 
 import "./style.css";
 import Invest from "components/Invest";
@@ -49,7 +56,8 @@ const styles = {
   },
 };
 const App = () => {
-  const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } = useMoralis();
+  const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } =
+    useMoralis();
 
   useEffect(() => {
     if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading) enableWeb3();
@@ -61,7 +69,7 @@ const App = () => {
       <Layout style={{ height: "100vh", background: "#f0f2f500" }}>
         <Header style={styles.header}>
           {/* <Logo /> */}
-          <img src={logoIcon} width="70" height="60"/>
+          <img src={logoIcon} width="70" height="60" />
           <Menu
             theme="light"
             mode="horizontal"
@@ -71,9 +79,8 @@ const App = () => {
               fontWeight: "500",
             }}
           >
-            
             <Menu.Item key="Home">
-              <NavLink to="/"> Home</NavLink>
+              <NavLink to="/home"> Home</NavLink>
             </Menu.Item>
             <Menu.Item key="invest">
               <NavLink to="/invest">🖼 Invest</NavLink>
@@ -93,7 +100,6 @@ const App = () => {
             <Menu.Item key="nft">
               <NavLink to="/nftBalance">🖼 NFT Balance</NavLink>
             </Menu.Item>
-
           </Menu>
           <div style={styles.headerRight}>
             <Chains />
@@ -134,9 +140,16 @@ const App = () => {
             <Route path="/nonauthenticated">
               <>Please login using the "Authenticate" button</>
             </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
             {/* <Redirect from="/" to="/wallet" /> */}
           </Switch>
-          {isAuthenticated ? <Redirect to="/wallet" /> : <Redirect to="/nonauthenticated" />}
+          {isAuthenticated ? (
+            <Redirect to="/home" />
+          ) : (
+            <Redirect to="/nonauthenticated" />
+          )}
         </div>
       </Layout>
     </Router>

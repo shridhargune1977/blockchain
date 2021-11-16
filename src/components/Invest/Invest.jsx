@@ -4,8 +4,10 @@ import styled from 'styled-components';
 import closeIcon from '../../assets/icons/close.png';
 import ToggleButton from "../ToogleButton/ToggleButton";
 import ChkPrice from "../ChkPrice"
+import { useMoralisDapp } from "providers/MoralisDappProvider/MoralisDappProvider";
 
 import styles from "./styles";
+
 const HeaderContainer = styled.div`
 background-color: white;
 width: 80%;
@@ -235,7 +237,13 @@ const ButtonContainer = styled.div`
 display: flex;
 justify-content: flex-end;
 `;
+
+
 function Invest (props) {
+  const { walletAddress, chainId } = useMoralisDapp();
+  //chainId -- 0x1->Ethereum, 0x4->Rinkeby ,0X89->Polygon,
+  console.log("current chain in invest:" + chainId);
+  console.log("walletAddress:" + walletAddress);
   const [symbole, setSymbol] = useState({
     value:'111',
     show:''
@@ -350,12 +358,23 @@ const handleChangeTextarea = (e) => {
                 <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'ETH / USD'}</div>
                 <div style={{color:"darkgray", fontSize:"12px", fontWeight:700}}>{'Link'}</div>                           
               </div>
-              <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419'}</div>
+              {/* <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419'}</div> */}
+              <div style={{color:"#041836", fontSize:"12px", fontWeight:700}}>{'0x8A753747A1Fa494EC906cE90E9f37563A8AF630e'}</div>
+              
               <div>
                 <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'0.06%'}</div>   
                 <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}> 
                 <ChkPrice
-              address="0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
+              address={
+              chainId === "0x1"
+                ? `0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419`
+              : chainId === "0x4"
+                ? `0x8A753747A1Fa494EC906cE90E9f37563A8AF630e`
+              : chainId === '0x89'
+                ?`0xF9680D99D6C9589e2a93a78A04A279e509205945`
+               : `0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419`
+              }
+              
               chain="eth"
               image="https://cloudflare-ipfs.com/ipfs/QmXttGpZrECX5qCyXbBQiqgQNytVGeZW5Anewvh2jc4psg/"
 
@@ -374,7 +393,15 @@ const handleChangeTextarea = (e) => {
                 <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'0.06%'}</div>   
                 <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}> 
                 <ChkPrice
-              address="0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c"
+              address={
+              chainId === "0x1"
+                ? `0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c`
+              : chainId === "0x4"
+                ? `0xECe365B379E1dD183B20fc5f022230C044d51404`
+              : chainId === '0x89'
+                ?`0xc907E116054Ad103354f2D350FD2514433D57F6f`
+               : `0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c`
+              }
               chain="eth"
               image="https://cloudflare-ipfs.com/ipfs/QmXttGpZrECX5qCyXbBQiqgQNytVGeZW5Anewvh2jc4psg/"
 
@@ -392,7 +419,15 @@ const handleChangeTextarea = (e) => {
                 <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'0.06%'}</div>
                 <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>    
                 <ChkPrice
-              address="0x2c1d072e956AFFC0D435Cb7AC38EF18d24d9127c"
+              address={
+              chainId === "0x1"
+                ? `0x2c1d072e956AFFC0D435Cb7AC38EF18d24d9127c`
+              : chainId === "0x4"
+                ? `0xd8bD0a1cB028a31AA859A21A3758685a95dE4623`
+              : chainId === '0x89'
+                ?`0xd9FFdb71EbE7496cC440152d43986Aae0AB76665`
+               : `0x2c1d072e956AFFC0D435Cb7AC38EF18d24d9127c`
+              }
               chain="eth"
               image="https://cloudflare-ipfs.com/ipfs/QmXttGpZrECX5qCyXbBQiqgQNytVGeZW5Anewvh2jc4psg/"
 
@@ -410,7 +445,15 @@ const handleChangeTextarea = (e) => {
                 <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}>{'0.06%'}</div>   
                 <div style={{color:"darkgreen", fontSize:"12px", fontWeight:700}}> 
                 <ChkPrice
-              address="0x547a514d5e3769680Ce22B2361c10Ea13619e8a9"
+              address={
+              chainId === "0x1"
+                ? `0x547a514d5e3769680Ce22B2361c10Ea13619e8a9`
+              : chainId === "0x4"
+                ? ``
+              : chainId === '0x89'
+                ?`0x72484B12719E23115761D5DA1646945632979bB6`
+               : `0x547a514d5e3769680Ce22B2361c10Ea13619e8a9`
+              }
               chain="eth"
               image="https://cloudflare-ipfs.com/ipfs/QmXttGpZrECX5qCyXbBQiqgQNytVGeZW5Anewvh2jc4psg/"
 

@@ -14,13 +14,17 @@ const styles = {
   },
 };
 function ChkPrice(props) {
-  const chkPrice = useChkPrice(props);
-  const [isUSDMode, setIsUSDMode] = useState(true);
-  console.log("chkPRice:" + chkPrice)
-  const toggleDisplayStyle = () => setIsUSDMode(isUSDMode ? false : true);
+  
+  let chkPrice = '';
+  
+  chkPrice = useChkPrice(props);
+  
+    const [isUSDMode, setIsUSDMode] = useState(true);
+    // console.log("chkPRice:" + chkPrice)
+    const toggleDisplayStyle = () => setIsUSDMode(isUSDMode ? false : true);
 
-  const noLogoToken = "https://etherscan.io/images/main/empty-token.png";
-
+    const noLogoToken = "https://etherscan.io/images/main/empty-token.png";
+  
   return (
     <div style={styles.token}>
       <span>
