@@ -80,7 +80,7 @@ const useChkPrice = (options) => {
     try {
       
       const roundData = await Moralis.executeFunction(options1);
-      // console.log("Latest Round Data", roundData);
+      console.log("Latest Round Data", roundData);
       let time = new Date(parseInt(roundData[2]) * 1000);
        price1 = parseInt(roundData[1]);
       // console.log("disp", price1);

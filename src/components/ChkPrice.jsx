@@ -20,7 +20,7 @@ function ChkPrice(props) {
   chkPrice = useChkPrice(props);
   
     const [isUSDMode, setIsUSDMode] = useState(true);
-    // console.log("chkPRice:" + chkPrice)
+    console.log("chkPRice:" + chkPrice)
     const toggleDisplayStyle = () => setIsUSDMode(isUSDMode ? false : true);
 
     const noLogoToken = "https://etherscan.io/images/main/empty-token.png";

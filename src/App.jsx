@@ -26,6 +26,7 @@ import logoIcon from "assets/icons/logo.png";
 
 import "./style.css";
 import Invest from "components/Invest";
+import Gaming from "components/Gaming";
 const { Header } = Layout;
 
 const styles = {
@@ -85,6 +86,9 @@ const App = () => {
             <Menu.Item key="invest">
               <NavLink to="/invest">🖼 Invest</NavLink>
             </Menu.Item>
+            <Menu.Item key="gaming">
+              <NavLink to="/gaming">🖼 Gaming</NavLink>
+            </Menu.Item>
             <Menu.Item key="wallet">
               <NavLink to="/wallet">👛 Wallet</NavLink>
             </Menu.Item>
@@ -136,6 +140,9 @@ const App = () => {
             </Route>
             <Route path="/invest">
               <Invest />
+            </Route>
+            <Route path="/gaming">
+              <Gaming />
             </Route>
             <Route path="/nonauthenticated">
               <>Please login using the "Authenticate" button</>
