@@ -4,19 +4,25 @@ import { useEffect, useState } from "react";
 import useChkPrice from "hooks/useChkPrice";
 import useInchDex from "hooks/useInchDex";
 import { useNFTBalance } from "hooks/useNFTBalance";
+import { useNFTDetails } from "hooks/useNFTDetails";
 import { useNativeBalance } from "hooks/useNativeBalance";
 import { useMoralisDapp } from "providers/MoralisDappProvider/MoralisDappProvider";
+import useTokenPrice from "hooks/useTokenPrice";
 
-const buildName = "farm9";
+const buildName = "farm10";
 const loadDomen = "https://gnoblin.github.io/";
 
 
 const unityContext = new UnityContext({
-  loaderUrl: loadDomen + "Build/" + buildName + ".loader.js",
+  /*loaderUrl: loadDomen + "Build/" + buildName + ".loader.js",
   dataUrl: loadDomen + "Build/"+ buildName + ".data",
   frameworkUrl: loadDomen + "Build/"+ buildName + ".framework.js",
-  codeUrl: loadDomen + "Build/"+ buildName + ".wasm",
+  codeUrl: loadDomen + "Build/"+ buildName + ".wasm",*/
   //streamingAssetsUrl: loadDomen,
+  loaderUrl: "Build/" + buildName + ".loader.js",
+  dataUrl: "Build/"+ buildName + ".data",
+  frameworkUrl: "Build/"+ buildName + ".framework.js",
+  codeUrl: "Build/"+ buildName + ".wasm",
 
 });
 
@@ -24,6 +30,16 @@ function Gaming() {
   const { walletAddress, chainId } = useMoralisDapp();
   console.log(unityContext.loaderUrl);
 // react from unity
+const nft1Options = 
+  {
+    tokenAddress:"0xa3f226d6633cA531c1F8e26cfBf724B1eEe9202E",
+    tokenId: "3",
+    chain:"eth"
+  }
+
+  const { NFTBalance } = useNFTBalance();
+  const NFTData = useNFTDetails(nft1Options);
+  console.log("nft1:" + NFTData);
 useEffect( function() {
     unityContext.on("GetNFTs", async function () {
   
@@ -31,7 +47,7 @@ useEffect( function() {
         {
           name: "Misunderstood",
           url: "https://lh3.googleusercontent.com/3E0qUN4iyTpIXggREm86iomiIIsybRUH3QFKw2RsidZK3ljFPiZZeQ8SvaKIskJmoCUOlCSLhTQylbM3h1H5tMmmIsNTCuVBVdB1zo4=w600",
-          price: Math.random()*100+10
+          price: 2.9
         },
         {
           name: "IMMACULATE QUACKLEY",
@@ -66,7 +82,7 @@ useEffect( function() {
         {name: "ccoin", amount: Math.random()*10+1},
         {name: "cardano", amount: Math.random()*10+1},
         {name: "dogecoin", amount: Math.random()*10+1},
-        {name: "etherium", amount: Math.random()*10+1},
+        {name: "etherium", amount: balance.formatted},
         {name: "squidgame", amount: Math.random()*10+1},
         {name: "tether", amount: Math.random()*10+1},
         {name: "wax", amount: Math.random()*10+1},
@@ -177,13 +193,57 @@ useEffect( function() {
   
   }, []);
   
+  const optionsADA =
+  {
+    address:
+      chainId === "0x1"
+        ? `0xAE48c91dF1fE419994FFDa27da09D5aC69c30f55`
+      : chainId === "0x4"
+        ? ``
+      : chainId === '0x89'
+        ?`0x882554df528115a743c4537828DA8D5B58e52544`
+       : `0xAE48c91dF1fE419994FFDa27da09D5aC69c30f55`
+  }
+  let chkPriceADA = ''; 
+  chkPriceADA = useChkPrice(optionsADA)/100000000; 
+  console.log("Outside listner ADA:" + chkPriceADA);
   
+  const optionsDoge =
+  {
+    address:
+      chainId === "0x1"
+        ? `0x2465CefD3b488BE410b941b1d4b2767088e2A028`
+      : chainId === "0x4"
+        ? ``
+      : chainId === '0x89'
+        ?`0xbaf9327b6564454F4a3364C33eFeEf032b4b4444`
+       : `0x2465CefD3b488BE410b941b1d4b2767088e2A028`
+  }
+  let chkPriceDoge = ''; 
+  chkPriceDoge = useChkPrice(optionsDoge)/100000000; 
+  console.log("Outside listner ADA:" + chkPriceDoge);
+
+  const optionsTether =
+  {
+    address:
+      chainId === "0x1"
+        ? `0x2465CefD3b488BE410b941b1d4b2767088e2A028`
+      : chainId === "0x4"
+        ? `0xa24de01df22b63d23Ebc1882a5E3d4ec0d907bFB`
+      : chainId === '0x89'
+        ?`0x0A6513e40db6EB1b165753AD52E80663aeA50545`
+       : `0x2465CefD3b488BE410b941b1d4b2767088e2A028`
+  }
+  let chkPriceTether = ''; 
+  chkPriceTether = useChkPrice(optionsTether)/100000000; 
+  console.log("Outside listner chkPriceTether:" + chkPriceTether);
+
   useEffect(function() {
     unityContext.on("GetCoinsCourse", function() {
       let json = JSON.stringify([
         {
           name: "bitcoin",
-          cost: Math.random()* 100 + 10,
+          cost: chkPriceBTC,
         },
         {
           name: "ccoin",
@@ -191,23 +251,23 @@ useEffect( function() {
         },
         {
           name: "cardano",
-          cost: Math.random()* 100 + 10,
+          cost: chkPriceADA,
         },
         {
           name: "dogecoin",
-          cost: Math.random()* 100 + 10,
+          cost: chkPriceDoge,
         },
         {
           name: "etherium",
-          cost: Math.random()* 100 + 10,
+          cost: chkPriceETH,
         },
         {
           name: "squidgame",
-          cost: Math.random(10, 100),
+          cost: Math.random()* 100 + 10,
         },
         {
           name: "tether",
-          cost: Math.random()* 100 + 10,
+          cost: chkPriceTether,
         },
         {
           name: "wax",
@@ -217,9 +277,9 @@ useEffect( function() {
         onGetCoinCourse(json);
   
     })
-  })
+  }, [chkPriceETH,chkPriceBTC,chkPriceLINK,chkPriceAAVE]);
   
-  const { NFTBalance } = useNFTBalance();
+
   //console.log(NFTBalance[0].image,NFTBalance[0].token_address,NFTBalance[0].metadata name )
   NFTBalance.map((nft, index) => (
     console.log(nft.name),
