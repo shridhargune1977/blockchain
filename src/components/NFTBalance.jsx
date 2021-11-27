@@ -18,7 +18,7 @@ const styles = {
 function NFTBalance(options) {
   const { NFTBalance } = useNFTBalance();
 
-  console.log(NFTBalance);
+  //console.log(NFTBalance);
   return (
     <>
       <div style={styles.NFTs}>

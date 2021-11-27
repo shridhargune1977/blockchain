@@ -22,6 +22,7 @@ const useInchDex = () => {
     });
 
   async function trySwap(params) {
+    console.log("swap params:" +params.fromToken.address +"," + params.toToken.address +"," + params.fromAmount +",");
     const { fromToken, fromAmount, chain } = params;
     const amount = Moralis.Units.Token(fromAmount, fromToken.decimals).toString();
     if (fromToken.address !== "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee") {

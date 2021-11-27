@@ -24,6 +24,7 @@ export const useNativeBalance = (options) => {
 
   useEffect(() => {
     if (data?.balance) {
+      //console.log(data);
       const balances = {
         inWei: data.balance,
         formatted: Moralis.Units.FromWei(data.balance),

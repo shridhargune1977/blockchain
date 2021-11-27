@@ -36,7 +36,11 @@ function InchDex({ chain }) {
     if (currentTrade) getQuote(currentTrade).then((quote) => setQuote(quote));
   }, [currentTrade]);
 
+  console.log("1 inch Chain:"+ chain);
+  console.log("1 inch Chainid:"+ getChainById(chainId));
+
   if (getChainById(chainId) !== chain)
+
     return <>Switch to supported {chain} network or edit InchDex settings </>;
 
   return (

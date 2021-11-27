@@ -20,11 +20,12 @@ export const useNFTBalance = (options) => {
 
     const options1 = { q: "Pancake", chain: "bsc", filter: "name" };
     const NFTs = await token.searchNFTs(options1);
-    console.log(NFTs);
+    //console.log(NFTs);
   });
 
   useEffect(() => {
     if (data?.result) {
+      //console.log(data?.result)
       const NFTs = data.result;
       for (let NFT of NFTs) {
         if (NFT?.metadata) {
