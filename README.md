@@ -1,12 +1,14 @@
-# `Crypto-Dashboard`
+# `DEFICity`
 
 
 # 🚀 Introduction
 
-An interactive gamified interface for web3 investors that allows them to build and track virtual diversified portfolios depending on risk appetite. Capability to execute those buy/sell instructions.
+DEFICity the metaverse for learning, investing and transacting in DeFi. 
 
-More details including the link to the backened on Moralis covered in whitepaper
-https://docs.google.com/document/d/1mQhrM8ZNKBrCHkoAs9QfHXcLfhTvXQiJ5HaiTENhsCo/edit?usp=sharing
+Product demo: https://demo-cube.surge.sh/
+Product presentation video: https://youtu.be/XFdGwHxLc7M
+Product presentation pdf: https://www.dropbox.com/s/2cnz53y4abeqja9/Chainlink%20Hackathon%20pres%20vFinal.pptx?dl=0
+
 
 🚴‍♂️ Install and Run the App:
 ```sh
