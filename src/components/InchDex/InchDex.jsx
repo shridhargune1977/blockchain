@@ -38,6 +38,7 @@ function InchDex({ chain }) {
 
   console.log("1 inch Chain:"+ chain);
   console.log("1 inch Chainid:"+ getChainById(chainId));
+  //console.log("tokenList:"+ JSON.stringify(tokenList));
 
   if (getChainById(chainId) !== chain)
 

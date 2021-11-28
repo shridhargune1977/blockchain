@@ -16,12 +16,12 @@ export const useNFTBalance = (options) => {
   } = useMoralisWeb3ApiCall(account.getNFTs, { chain: chainId, ...options });
   
   const { token } = useMoralisWeb3Api();
-  useEffect(async () => {
+/*  useEffect(async () => {
 
     const options1 = { q: "Pancake", chain: "bsc", filter: "name" };
     const NFTs = await token.searchNFTs(options1);
     //console.log(NFTs);
-  });
+  });*/
 
   useEffect(() => {
     if (data?.result) {

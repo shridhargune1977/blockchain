@@ -24,6 +24,6 @@ export const useERC20Balance = (params) => {
       .then((result) => result)
       .catch((e) => alert(e.message));
   };
-
+console.log("Asets : " + JSON.stringify(assets));
   return { fetchERC20Balance, assets };
 };

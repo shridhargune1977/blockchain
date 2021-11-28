@@ -8,21 +8,23 @@ import { useNFTDetails } from "hooks/useNFTDetails";
 import { useNativeBalance } from "hooks/useNativeBalance";
 import { useMoralisDapp } from "providers/MoralisDappProvider/MoralisDappProvider";
 import useTokenPrice from "hooks/useTokenPrice";
+import { useERC20Balance } from "hooks/useERC20Balance";
+import { useMoralis } from "react-moralis";
 
 const buildName = "farm10";
 const loadDomen = "https://gnoblin.github.io/";
 
 
 const unityContext = new UnityContext({
-  /*loaderUrl: loadDomen + "Build/" + buildName + ".loader.js",
+  loaderUrl: loadDomen + "Build/" + buildName + ".loader.js",
   dataUrl: loadDomen + "Build/"+ buildName + ".data",
   frameworkUrl: loadDomen + "Build/"+ buildName + ".framework.js",
-  codeUrl: loadDomen + "Build/"+ buildName + ".wasm",*/
+  codeUrl: loadDomen + "Build/"+ buildName + ".wasm",
   //streamingAssetsUrl: loadDomen,
-  loaderUrl: "Build/" + buildName + ".loader.js",
+  /*loaderUrl: "Build/" + buildName + ".loader.js",
   dataUrl: "Build/"+ buildName + ".data",
   frameworkUrl: "Build/"+ buildName + ".framework.js",
-  codeUrl: "Build/"+ buildName + ".wasm",
+  codeUrl: "Build/"+ buildName + ".wasm",*/
 
 });
 
@@ -38,11 +40,12 @@ const nft1Options =
   }
 
   const { NFTBalance } = useNFTBalance();
-  const NFTData = useNFTDetails(nft1Options);
-  console.log("nft1:" + NFTData);
+  //const NFTData = useNFTDetails(nft1Options);
+  //console.log("nft1:" + NFTData);
 useEffect( function() {
     unityContext.on("GetNFTs", async function () {
   
+console.log("GetNFTs - in the shop");
       let json = JSON.stringify([
         {
           name: "Misunderstood",
@@ -74,9 +77,20 @@ useEffect( function() {
   }
   const { balance, nativeName } = useNativeBalance(props);
   console.log(balance.formatted + nativeName);
+  const { assets } = useERC20Balance(props);
+  //const balBTC = assets.filter((e) => e.symbol === "0xBTC")
+  const { Moralis } = useMoralis();
+  
+  
+
   useEffect( function() {
     unityContext.on("GetBalance", async function () {
   
+  console.log("GetBalance (coins)");
+      let balBTC;
+      console.log("assets:" + JSON.stringify(assets))
+      balBTC = assets.filter((e) => e.symbol === "0xBTC")
+      //console.log("balBTC: " + parseFloat(Moralis.Units.FromWei(balBTC.balance, balBTC.decimals).toFixed(6)) )
       let json = JSON.stringify([
         {name: "bitcoin", amount: Math.random()*10+1},
         {name: "ccoin", amount: Math.random()*10+1},
@@ -92,7 +106,7 @@ useEffect( function() {
   
     });
   
-  }, []);
+  }, [assets]);
 
   const optionsETH =
   { 
@@ -137,7 +151,7 @@ useEffect( function() {
   }
   let chkPriceLINK = ''; 
   chkPriceLINK = useChkPrice(optionsLINK)/100000000; 
-  console.log("Outside listner LINK:" + chkPriceLINK);
+ console.log("Outside listner LINK:" + chkPriceLINK);
 
   const optionsAAVE =
   {
@@ -176,19 +190,34 @@ useEffect( function() {
   
   
   const { trySwap, getQuote, getSupportedTokens, tokenList } = useInchDex();
-  const currentTrade = 
+  const currentTradeBTC = 
   {
-    fromToken:"0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
-    toToken: "0xd6df932a45c0f255f85145f286ea0b292b21c90b",
-    fromAmount:"0.01",
-    chain:"polygon"
+    "fromToken": {"symbol":"MATIC","name":"MATIC","decimals":18,"address":"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                  "logoURI":"https://tokens.1inch.io/0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0.png"},
+    "toToken": {"symbol":"0xBTC","name":"0xBitcoin Token","decimals":8,"address":"0x71b821aa52a49f32eed535fca6eb5aa130085978",
+              "logoURI":"https://tokens.1inch.io/0x71b821aa52a49f32eed535fca6eb5aa130085978.png"},
+    "fromAmount":"11111111111111111",
+    "chain":"polygon"
+  }
+
+  const currentTradeTether = 
+  {
+    "fromToken": {"symbol":"MATIC","name":"MATIC","decimals":18,"address":"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                  "logoURI":"https://tokens.1inch.io/0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0.png"},
+    "toToken": {"symbol":"USDT","name":"Tether USD","decimals":6,"address":"0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+                  "logoURI":"https://tokens.1inch.io/0xdac17f958d2ee523a2206206994597c13d831ec7.png"},
+    "fromAmount":"111111111111111",
+    "chain":"polygon"
   }
 
   useEffect( function() {
-    unityContext.on("Buy", function () {
-      trySwap(currentTrade);
-    
-      onBuy("buy status");
+    unityContext.on("Buy", function (token, amount) {    
+      
+    console.log("Buy "+token+", "+amount);
+    if (token == "Bitcoin") trySwap(currentTradeBTC);
+    else if (token == "Tether") trySwap(currentTradeTether);
+    else (console.log("token not available for purchase"));
+    onBuy("buy status", token, amount);
     });
   
   }, []);
@@ -221,7 +250,7 @@ useEffect( function() {
   }
   let chkPriceDoge = ''; 
   chkPriceDoge = useChkPrice(optionsDoge)/100000000; 
-  console.log("Outside listner ADA:" + chkPriceDoge);
+  console.log("Outside listner Doge:" + chkPriceDoge);
 
   const optionsTether =
   {
@@ -240,6 +269,15 @@ useEffect( function() {
 
   useEffect(function() {
     unityContext.on("GetCoinsCourse", function() {
+    console.log("GetCoinsCourse means get Coin Price ");
+    console.log("inside listner ETH:" + chkPriceETH);
+    console.log("inside listner BTC:" + chkPriceBTC);
+    console.log("inside listner LINK:" + chkPriceLINK);
+    console.log("inside listner AAVE:" + chkPriceAAVE);
+    console.log("inside listner Tether:" + chkPriceTether);
+    console.log("inside listner Doge:" + chkPriceDoge);
+    console.log("inside listner ADA:" + chkPriceADA);
+
       let json = JSON.stringify([
         {
           name: "bitcoin",
@@ -277,7 +315,7 @@ useEffect( function() {
         onGetCoinCourse(json);
   
     })
-  }, [chkPriceETH,chkPriceBTC,chkPriceLINK,chkPriceAAVE]);
+  }, [chkPriceETH,chkPriceBTC,chkPriceLINK,chkPriceAAVE,chkPriceTether,chkPriceDoge,chkPriceADA]);
   
 
   //console.log(NFTBalance[0].image,NFTBalance[0].token_address,NFTBalance[0].metadata name )
@@ -288,13 +326,21 @@ useEffect( function() {
     ));
   useEffect( function() {
     unityContext.on("GetNftBalance", function () {
-    console.log(NFTBalance)
+    console.log("GetNFTBalance - in your house");
       let json = JSON.stringify([
-        {name: "Misunderstood", amount: Math.random()*100+10},
-        {name: "IMMACULATE QUACKLEY", amount: Math.random()*100+10},         
-        {name: "Runner", amount: 25 }, 
-        {name: "Bitfox", amount: Math.random()*100+10},
-              ]);
+      {name: "Misunderstood",
+       amount: Math.random()*100+10,
+       url:"https://lh3.googleusercontent.com/3E0qUN4iyTpIXggREm86iomiIIsybRUH3QFKw2RsidZK3ljFPiZZeQ8SvaKIskJmoCUOlCSLhTQylbM3h1H5tMmmIsNTCuVBVdB1zo4=w600"},
+      {name: "IMMACULATE QUACKLEY",
+       amount: Math.random()*100+10,
+       url:"https://lh3.googleusercontent.com/94YGYl98ddOzenQE7h1wF0vT3hlvWNTr1JBw9rXJ4VsMv4pfET4MQXCLzCqqESefGRlDZiOATp1SNufPVHp23vJDkjVJiaNapjvh7w=w600"},         
+      {name: "Bohemian Bulldog",
+       amount: Math.random()*100+10,
+       url: "https://lh3.googleusercontent.com/AMsHvRMGxYwljHCURORo26vAY_coUXotmAD947U_lpsS6aamSxcbIg7P9AeiBWet7qGDYifuQokxYOIMRvVnpNcNLJS-6N61tDGx=w600"}, 
+      {name: "CreatureToad",
+       amount: Math.random()*100+10,
+       url: "https://lh3.googleusercontent.com/jOIWdyKz0IRrpsjqEUOIWeNfOzmso-O4f9ZFkw18o18VEhm-gu3Yl2f9hTQ18fIkOT1L-oX8ovNi9t4d5OwEvmsW9hsr5zRmTAbJbQ=w600"
+      }]);
               
       onGetNftBalance(json);
       
@@ -305,11 +351,12 @@ useEffect( function() {
   
   useEffect( function() {
     unityContext.on("GetGet", function () {
+    console.log("GetNFTBalance - in your house (again)");
       let json = JSON.stringify([
         {name: "Misunderstood", amount: Math.random()*100+10},
         {name: "IMMACULATE QUACKLEY", amount: Math.random()*100+10},         
-        {name: "Runner", amount: 25 }, 
-        {name: "Bitfox", amount: Math.random()*100+10},
+      {name: "Bohemian Bulldog", amount: Math.random()*100+10}, 
+      {name: "CreatureToad", amount: Math.random()*100+10},
               ]);
               
       onGetNftBalance(json);
@@ -322,6 +369,7 @@ useEffect( function() {
 
   useEffect( function() {
     unityContext.on("BuyCoins", function () {
+    console.log("Buy Coins (not used) ?");
       let status = "status";
               
       onBuyCoins(status);
@@ -335,7 +383,7 @@ useEffect( function() {
   
   
   //unity from react
-  function onBuy(status) {
+function onBuy(status, coin, count) {
     unityContext.send("NFTManager", "OnBuy", status);
   }
   

@@ -11,8 +11,9 @@ const useInchDex = () => {
   const getSupportedTokens = async (chain) =>
     await Moralis.Plugins.oneInch
       .getSupportedTokens({ chain })
-      .then((tokens) => setTokenlist(tokens.tokens));
-
+      .then((tokens) => setTokenlist(tokens.tokens)
+      );      
+    
   const getQuote = async (params) =>
     await Moralis.Plugins.oneInch.quote({
       chain: params.chain, // The blockchain you want to use (eth/bsc/polygon)
@@ -21,8 +22,8 @@ const useInchDex = () => {
       amount: Moralis.Units.Token(params.fromAmount, params.fromToken.decimals).toString(),
     });
 
-  async function trySwap(params) {
-    console.log("swap params:" +params.fromToken.address +"," + params.toToken.address +"," + params.fromAmount +",");
+  async function trySwap(params) {    
+    console.log("swap params:" +JSON.stringify(params));
     const { fromToken, fromAmount, chain } = params;
     const amount = Moralis.Units.Token(fromAmount, fromToken.decimals).toString();
     if (fromToken.address !== "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee") {
@@ -43,17 +44,17 @@ const useInchDex = () => {
             });
           }
         })
-        .catch((e) => alert(e.message));
+        .catch((e) => console.log("Approve error :" + e.message));
     }
 
     await doSwap(params)
-      .then((receipt) => {
+      .then((receipt) => {        
         if (receipt.statusCode !== 400) {
-          alert("Swap Complete");
+          console.log("Swap Complete");
         }
         console.log(receipt);
       })
-      .catch((e) => alert(e.message));
+      .catch((e) => console.log("swap error:" + e.message));
   }
 
   async function doSwap(params) {
